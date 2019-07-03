@@ -52,32 +52,23 @@ Next, the tweets are tokenized and lemmatized. Here is an example of the stemmin
 
 I create a bag-of-words and also TF-IDF using gensim. Then I ran at Latent-dirichlet analysis (LDA) using bag-of-words and TF-IDF.
 
-Bag-of-words
+### Bag-of-words
 |Topic|Words|
 |:---:|:---:|
-|0|[glutenfre, vegan, coffe, time, thank, happi, come, free, dinner, tonight|
-|1|[diet, good, weight, loss, idea, fee, love, meal, free, best|
-|2|[atkin, diet, carb, lose, like, great, peopl, food, week, today|
-|3|[diet, work, know, friendli, go, review, dinner, cauliflow, chicken, carb|
-|4|[week, right, paleo, fast, sugar, bread, make, feel delici, look|
+|0|glutenfre, vegan, coffe, time, thank, happi, come, free, dinner, tonight|
+|1|diet, good, weight, loss, idea, fee, love, meal, free, best|
+|2|atkin, diet, carb, lose, like, great, peopl, food, week, today|
+|3|diet, work, know, friendli, go, review, dinner, cauliflow, chicken, carb|
+|4|week, right, paleo, fast, sugar, bread, make, feel delici, look|
 
-| - | type | posts |
-|:---:|:---:|:---:|
-| 0 | INFJ | 'http://www.youtube.com/watch?v=qsXHcwe3krw|||...'|
-| 1 | ENTP | 'I'm finding the lack of me in these posts ver..' |
-| 2 | INTP | 'Good one _____ https://www.youtube.com/wat...' |
-| 3 | INTJ | 'Dear INTP, I enjoyed our conversation the o... '|
-| 4 | ENTJ | 'You're fired.|||That's another silly misconce... '|
-
-
-TF-IDF
+### TF-IDF
 |Topic|Words|
 |:---:|:---:|
-|0|[go, chicken, dinner, fast, think, tri, recip, diet, right, best |
-|1|[diet, paleo, know, thank, great, day, vegan, time, feel, meal |
-|2|[good, weight, idea, loss, diet, fee, like, ,love glutenfre, help |
-|3|[food, come, friendli, happi, health, thing, father, ketodiet, work, ketogen|
-|4|[atkin, glutenfre, week, carb, bread, today, coffe, lose, delici, chocol|
+|0|go, chicken, dinner, fast, think, tri, recip, diet, right, best |
+|1|diet, paleo, know, thank, great, day, vegan, time, feel, meal |
+|2|good, weight, idea, loss, diet, fee, like, ,love glutenfre, help |
+|3|food, come, friendli, happi, health, thing, father, ketodiet, work, ketogen|
+|4|atkin, glutenfre, week, carb, bread, today, coffe, lose, delici, chocol|
 
 It looks like topics can be broken down into happiness, weight-loss, carbs, ingredients, and deliciousness.
 
