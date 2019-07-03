@@ -16,7 +16,7 @@ PDF: https://drive.google.com/file/d/1RrDwgiRb_zyAFHyjcw0eih1gRjDUZj0p/view?usp=
 
 # Description
 
-I have a background in nutrition. When I bring this up, one of the first questions I always get is, “What do you think about <insert fad diet>?" Limitations of traditional nutrition research include: a large investment in money and time, involvement of human subjects, and not being agile enough to keep up with rapidly-changing trends. Measuring sentiment on social media is a way to guide research to overcome some of these limitation. From a public health perspective, investments can be made into diets that are shown to have an association with an outcome like obesity. From a marketing perspective, companies can glean insights on what consumers are interested in. The diet and weight loss industry in the US is estimated to be worth $72 billion dollars.
+I have a background in nutrition. When I bring this up, one of the first questions I always get is, “What do you think about ...insert fad diet...?" Limitations of traditional nutrition research include: a large investment in money and time, involvement of human subjects, and not being agile enough to keep up with rapidly-changing trends. Measuring sentiment on social media is a way to guide research to overcome some of these limitation. From a public health perspective, investments can be made into diets that are shown to have an association with an outcome like obesity. From a marketing perspective, companies can glean insights on what consumers are interested in. The diet and weight loss industry in the US is estimated to be worth $72 billion dollars.
 
 #### Goals and Questions:
 (1) Perform topic modeling and sentiment analysis of "fad" diet tweets.  
