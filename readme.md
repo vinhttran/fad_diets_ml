@@ -1,17 +1,9 @@
-1) high-level description of the project, including motivation, goals, etc.
-2) EDA:  data source + visualizations + feature engineering
-3) description of your model and results (possible tables & visualization)
-4) summary / interpretations
-5) [optional] future work
-c) folder `src` with necessary source code
-d) presentation slides
-e) folder `images` with images that your md file includes
-
 # Analyzing Fad Diet Tweets
 Vinh Tran
 
 ### Link to Presentation
 Keynote: https://drive.google.com/file/d/1eELvOFhvU7BpXIzDhOLDOIlTbJy5KrYq/view?usp=sharing
+
 PDF: https://drive.google.com/file/d/1RrDwgiRb_zyAFHyjcw0eih1gRjDUZj0p/view?usp=sharing
 
 # Table of Contents
@@ -29,6 +21,7 @@ I have a background in nutrition. When I bring this up, one of the first questio
 #### Goals and Questions:
 (1) Perform topic modeling and measure sentiment of "fad" diet tweets.  
 - When people tweet about fad diets, what are the general topics they tweeting about? Is the tweet sentiment positive, negative or neutral?
+
 (2) Determine if tweet sentiment is associated with city-level obesity rates.
 - Given sufficient text, predict the personality type of the individual.
 
@@ -41,24 +34,23 @@ Removing re-tweets leaves 53,176 tweets.
 
 Number of tweets with location data leaves 2,692 tweets.
 
-Keto is by far the most tweeted about diet
+Keto is by far the most tweeted about diet as shown in this
 ![](images/Popularity_of_fad_diets.png)
 
 Limiting to english and US only leaves 1,494
-
 ![](images/usmap.png)
 
 
 # Topic Modeling
 First, the tweets are cleaned to remove URLs, smileys, mentions and emojis using the preprocessor
 
-Then, stemming is performed using PorterStemmer. Below is a WordCloud of the most popular words
+Then, stemming is performed using PorterStemmer. Below is a WordCloud of the most popular words.
 ![](images/word1.png)
 
-Next, the tweets are tokenized and lemmatized. Here is an example of the stemming
+Next, the tweets are tokenized and lemmatized. Here is an example of the stemming.
 ![](images/tokenlem.png)
 
-I create a bag-of-words and also TF-IDF using gensim. Then I ran at Latent-dirichlet analysis using bag-of-words and TF-IDF.
+I create a bag-of-words and also TF-IDF using gensim. Then I ran at Latent-dirichlet analysis (LDA) using bag-of-words and TF-IDF.
 
 Bag-of-words
 |Topic|Words|
@@ -78,7 +70,7 @@ TF-IDF
 |3|[food, come, friendli, happi, health, thing, father, ketodiet, work, ketogen|
 |4|[atkin, glutenfre, week, carb, bread, today, coffe, lose, delici, chocol|
 
-It looks like topics can be broken down into happiness, weight-loss, carbs, ingredients, and deliciousness
+It looks like topics can be broken down into happiness, weight-loss, carbs, ingredients, and deliciousness.
 
 # Sentiment Analysis
 
@@ -103,10 +95,10 @@ Do I need to do other diagnostics???
 
 # Conclusion and Next Steps
 
-- Topic modeling and sentiment analysis are useful tools in understanding why people may be tweeting about fad diets. More interestingly, these tweets are shown to be correlated with obesity prevelance rates. One limitation of my data are that tweets with location data make up a very small percentage of overall tweets about fad diets and may not be representative of the population since people have to opt-in to share location data. Additionally, the CDC dataset is only limited to the 500 largest cities which represent ~1/3 of the population. Thus, rural areas are not represented in this data. The tweets being mapped to major cities may be coming from rural areas.
+- Topic modeling and sentiment analysis are useful tools in understanding why people may be tweeting about fad diets. It was harder to interpret the distinct topics. There were more positive and neutral tweets than negative tweets. More interestingly, these tweets are shown to be correlated with obesity prevelance rates. One limitation of my data are that tweets with location data make up a very small percentage of overall tweets about fad diets and may not be representative of the population since people have to opt-in to share location data. Additionally, the CDC dataset is only limited to the 500 largest cities which represent ~1/3 of the population. Thus, rural areas are not represented in this data. The tweets being mapped to major cities may be coming from rural areas.
 
 Next Steps
-- I did not consider emoji's in the sentiment analysis but increasingly emoji's are a main way of communicating
+- I did not consider emoji's in the sentiment analysis but increasingly emoji's are a main way of communicating. 
 - My Capstone 3 goal is to make a prediction on how positively fad diets are perceived in a city. This can be generalized to understand how certain markets respond to fad diets.
 
 
