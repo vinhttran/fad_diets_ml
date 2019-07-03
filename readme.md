@@ -16,10 +16,10 @@ PDF: https://drive.google.com/file/d/1RrDwgiRb_zyAFHyjcw0eih1gRjDUZj0p/view?usp=
 
 # Description
 
-I have a background in nutrition. When I bring this up, one of the first questions I always get is, “What do you think about <insert fad diet>?" Limitations of traditional nutrition research include: a large investment in money and time, involvement of human subjects, and not being agile enough to keep up with rapidly-changing trends. Measuring sentiment on social media is a way to guide research which overcomes these limitation. From a public health perspective, investments can be made into diets that are shown to have an association with an outcome like obesity. From a marketing perspective, companies can glean insights on what consumers are interested in. The diet and weight loss industry in the US is estimated to be worth $72 billion dollars.
+I have a background in nutrition. When I bring this up, one of the first questions I always get is, “What do you think about <insert fad diet>?" Limitations of traditional nutrition research include: a large investment in money and time, involvement of human subjects, and not being agile enough to keep up with rapidly-changing trends. Measuring sentiment on social media is a way to guide research to overcome some of these limitation. From a public health perspective, investments can be made into diets that are shown to have an association with an outcome like obesity. From a marketing perspective, companies can glean insights on what consumers are interested in. The diet and weight loss industry in the US is estimated to be worth $72 billion dollars.
 
 #### Goals and Questions:
-(1) Perform topic modeling and measure sentiment of "fad" diet tweets.  
+(1) Perform topic modeling and sentiment analysis of "fad" diet tweets.  
 - When people tweet about fad diets, what are the general topics they tweeting about? Is the tweet sentiment positive, negative or neutral?
 
 (2) Determine if tweet sentiment is associated with city-level obesity rates.
@@ -28,77 +28,94 @@ I have a background in nutrition. When I bring this up, one of the first questio
 
 # Exploratory Data Analysis
 
-Collected 97,816 fad diet tweets with keywords:  'keto','whole30','glutenfree','mediterraneandiet','lowfat', 'atkins', 'paleo', 'celeryjuice'
+Tweets were collected using the Twitter streaming API. So far, 97,816 tweets with the following "fad" diet keywords have been collected:  'keto','whole30','glutenfree','mediterraneandiet','lowfat', 'atkins', 'paleo', 'celeryjuice'
+- Removing re-tweets leaves 53,176 tweets
+- Removing non-English tweets leaves 43,716
 
-Removing re-tweets leaves 53,176 tweets.
-
-Number of tweets with location data leaves 2,692 tweets.
-
-Keto is by far the most tweeted about diet as shown in this
+- Keto is by far the most tweeted about diet
 ![](images/Popularity_of_fad_diets.png)
 
-Limiting to english and US only leaves 1,494
+- Limiting to English and US only tweets leaves 1,494. Below is a map that shows where each tweet is coming from.
 ![](images/usmap.png)
 
+City level health outcomes come from the CDC 500 Cities Project, which includes outcomes like obesity, smoking and diabetes prevalence.
 
 # Topic Modeling
-First, the tweets are cleaned to remove URLs, smileys, mentions and emojis using the preprocessor
+
+First, the tweets are cleaned to remove stopwords, URLs, smileys, mentions and emojis using the preprocessor.
 
 Then, stemming is performed using PorterStemmer. Below is a WordCloud of the most popular words.
 ![](images/word1.png)
 
-Next, the tweets are tokenized and lemmatized. Here is an example of the stemming.
+Then, the tweets are tokenized. Here is an example of the tokenization.
+
 ![](images/tokenlem.png)
 
-I create a bag-of-words and also TF-IDF using gensim. Then I ran at Latent-dirichlet analysis (LDA) using bag-of-words and TF-IDF.
+Then I created the dictionary and the corpus for LDA using the gensim library.
+
+I created a bag-of-words and also TF-IDF. Next I ran at Latent Dirichlet Allocation (LDA) using bag-of-words and TF-IDF.
 
 ### Bag-of-words
 |Topic|Words|
 |:---:|:---:|
-|0|glutenfre, vegan, coffe, time, thank, happi, come, free, dinner, tonight|
-|1|diet, good, weight, loss, idea, fee, love, meal, free, best|
-|2|atkin, diet, carb, lose, like, great, peopl, food, week, today|
-|3|diet, work, know, friendli, go, review, dinner, cauliflow, chicken, carb|
-|4|week, right, paleo, fast, sugar, bread, make, feel delici, look|
+|0|recip, paleo, carb, easi, chicken, glutenfre, delici, chees, bread, cooki|
+|1|free, glutenfre, gluten, vegan, food, cake, chocol, sugar, friendly, carb|
+|2|pizza, year, enter, right, want, fast, free, pork, coupon, seri|
+|3|diet, atkin, weight, lose, loss, go, help, think, week, work|
+|4|diet, recip, meal, ketogen, paleo, look, like, healthi, love, plan|
 
 ### TF-IDF
 |Topic|Words|
 |:---:|:---:|
-|0|go, chicken, dinner, fast, think, tri, recip, diet, right, best |
-|1|diet, paleo, know, thank, great, day, vegan, time, feel, meal |
-|2|good, weight, idea, loss, diet, fee, like, ,love glutenfre, help |
-|3|food, come, friendli, happi, health, thing, father, ketodiet, work, ketogen|
-|4|atkin, glutenfre, week, carb, bread, today, coffe, lose, delici, chocol|
+|0|free, thank, atkin, latest, pizza, right, gluten, daili, glutenfre, coupon |
+|1|diet, paleo, recip, work, atkin, drink, review, carb, like, chicken |
+|2|diet, lose, weight, go, week, help, ketosi, ketogen,  know, carb |
+|3|food, loss, best, look, fast, avail, ketodiet, good, need, begin|
+|4|glutenfre, paleo, vegan, food, friendli, recip, chocol, year, want, cooki|
 
-It looks like topics can be broken down into happiness, weight-loss, carbs, ingredients, and deliciousness.
+
+To measure model perplexity (how good the model is) I calculated the perplexity score. The lower the better.
+
+Perplexity bow:  -6.618952989869589
+Perplexity tfidf:  -7.571086243363428
+
+Since the tf-idf model seemed to perform better, I used this to visualize the topics. The larger the bubble, the more prevalent the topic. Ideally topics are big, non-overlapping and distributed throughout the quadrants.
+
+![](images/Intertopic_Distance_Map.png)
+
+
+For the TF-IDF model, topics can be broken down into: cooking, feel-good diets, weight-loss, health, indulgences.
 
 # Sentiment Analysis
 
-TextBlob was used to score each cleaned and stemmed tweet calculating a polarity and sentiment.
+TextBlob was used to score each tweet, calculating a polarity and sentiment.
 
 ![](images/Tweet_Sentiment.png)
 
-### Ask Hamid about Naive Bayes Classifier
+### Naive Bayes Classifier
+Accuracy = 0.774869109947644
 
 # Linear Regression
-I then performed a linear regression to answer the question, "Are positive, negative or neutral tweets associated with obesity?" The postulation is that if people tweet more positively about a fad diet they are more interested and engaged in their health and therefore more likely to be a healthy weight. I did the analysis at the city level. I aggregated tweet sentiment to the city level and merged to the 2018 CDC 500 cities datafile which includes a series of variables on health measures such as obesity, CHD, diabetes, and smoking prevalence among others.
 
-To do this, I first had to find the nearest major city given a set of coordinates for each tweet. Then, I merged my twitter data to the CDC 500 cities data by city. My resulting data had 294 observations.
+I then performed a linear regression to answer the question, "Are positive tweets associated with obesity?" The postulation is that if people tweet more positively about a fad diet they are on a diet seeking to lose weight.
 
-## Feature Selection
-Since the CDC 500 data contains health measures that are highly correlated with each other, I only included variables that were not highly correlated. These were:
+I did the analysis at the city level. I aggregated tweet sentiment to the city level (number of tweets with location data and in the US results in 1,494 tweets) and merged to the 2018 CDC 500 cities datafile which includes a series of variables on health measures such as obesity, CHD, diabetes, and smoking prevalence among others. In order to do this, I first had to find the nearest major city given a set of coordinates for each tweet. Then, I merged my twitter data to the CDC 500 cities data by city. My resulting data had 294 observations. 221 of these observations had positive tweet values.
 
-My R-squared = 0.890
+### Results
 
-Do I need to do other diagnostics???
+The linear regression shows that positive tweet sentiment has no association with obesity rates.
 
 
 # Conclusion and Next Steps
 
-- Topic modeling and sentiment analysis are useful tools in understanding why people may be tweeting about fad diets. It was harder to interpret the distinct topics. There were more positive and neutral tweets than negative tweets. More interestingly, these tweets are shown to be correlated with obesity prevelance rates. One limitation of my data are that tweets with location data make up a very small percentage of overall tweets about fad diets and may not be representative of the population since people have to opt-in to share location data. Additionally, the CDC dataset is only limited to the 500 largest cities which represent ~1/3 of the population. Thus, rural areas are not represented in this data. The tweets being mapped to major cities may be coming from rural areas.
+Topic modeling and sentiment analysis are useful tools in understanding why people may be tweeting about fad diets. Interpreting the distinct topics is a skill and requires domain knowledge. Overall, there were more positive and neutral tweets than negative tweets. I created a Naive Bayes classifier with 70 percent accuracy. Interestingly, positive tweets are not shown to be correlated with obesity prevalence rates at all.
 
-Next Steps
+One limitation of my data are that tweets with location data make up a very small percentage of overall tweets about fad diets and may not be representative of the population since people have to opt-in to share location data. Additionally, the CDC dataset is only limited to the 500 largest cities which represent ~1/3 of the population. Thus, rural areas are not represented in this data. The tweets being mapped to major cities may be coming from rural areas. Also, there were much fewer negative tweets which led to unequal classes impacting the Naive Bayes Classifier.
+
+### Next Steps
 - I did not consider emoji's in the sentiment analysis but increasingly emoji's are a main way of communicating.
+- Need more data! Continuously collect more tweets on AWS, utilize Spark.
+- Combine with city level demographic data.
 - My Capstone 3 goal is to make a prediction on how positively fad diets are perceived in a city. This can be generalized to understand how certain markets respond to fad diets.
 
 

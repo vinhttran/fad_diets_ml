@@ -46,7 +46,7 @@ def bag_of_words(tweet, all_text):
     words_dictionary = dict([word, True] for word in words)
     return words_dictionary
 
- def load_US_coord_dict():
+def load_US_coord_dict():
     '''
     Input: n/a
     Output: A dictionary whose keys are the location names ('City, State') of the
