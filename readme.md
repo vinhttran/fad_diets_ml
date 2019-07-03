@@ -61,6 +61,15 @@ Bag-of-words
 |3|[diet, work, know, friendli, go, review, dinner, cauliflow, chicken, carb|
 |4|[week, right, paleo, fast, sugar, bread, make, feel delici, look|
 
+| - | type | posts |
+|:---:|:---:|:---:|
+| 0 | INFJ | 'http://www.youtube.com/watch?v=qsXHcwe3krw|||...'|
+| 1 | ENTP | 'I'm finding the lack of me in these posts ver..' |
+| 2 | INTP | 'Good one _____ https://www.youtube.com/wat...' |
+| 3 | INTJ | 'Dear INTP, I enjoyed our conversation the o... '|
+| 4 | ENTJ | 'You're fired.|||That's another silly misconce... '|
+
+
 TF-IDF
 |Topic|Words|
 |:---:|:---:|
@@ -98,7 +107,7 @@ Do I need to do other diagnostics???
 - Topic modeling and sentiment analysis are useful tools in understanding why people may be tweeting about fad diets. It was harder to interpret the distinct topics. There were more positive and neutral tweets than negative tweets. More interestingly, these tweets are shown to be correlated with obesity prevelance rates. One limitation of my data are that tweets with location data make up a very small percentage of overall tweets about fad diets and may not be representative of the population since people have to opt-in to share location data. Additionally, the CDC dataset is only limited to the 500 largest cities which represent ~1/3 of the population. Thus, rural areas are not represented in this data. The tweets being mapped to major cities may be coming from rural areas.
 
 Next Steps
-- I did not consider emoji's in the sentiment analysis but increasingly emoji's are a main way of communicating. 
+- I did not consider emoji's in the sentiment analysis but increasingly emoji's are a main way of communicating.
 - My Capstone 3 goal is to make a prediction on how positively fad diets are perceived in a city. This can be generalized to understand how certain markets respond to fad diets.
 
 
